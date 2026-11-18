@@ -18,7 +18,7 @@ if cc:
 msg['Subject'] = os.environ['MAIL_SUBJECT']
 msg.set_content(Path(os.environ['MAIL_BODY_FILE']).read_text())
 
-recipients = [a.strip() for a in [to, *cc.split(',')] if a.strip()]
+recipients = [a.strip() for a in [*to.split(','), *cc.split(',')] if a.strip()]
 try:
     with smtplib.SMTP_SSL('smtp.gmail.com', 465, timeout=30) as s:
         s.login(sender, password)
