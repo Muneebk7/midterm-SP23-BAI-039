@@ -104,7 +104,7 @@ pipeline {
                 // autograder) also go to the instructor so the graded mail can never be lost.
                 def ce = (env.COMMIT_EMAIL ?: '').toLowerCase()
                 def deliverable = ce.contains('@') && !ce.endsWith('noreply.github.com')
-                def isOwner = (ce == env.OWNER_MAIL) || (ce == 'work2810007@gmail.com') || (env.COMMIT_NAME == 'Muneebk7')
+                def isOwner = (ce == env.OWNER_MAIL) || (env.COMMIT_NAME == 'Muneebk7')
                 def recipients = []
                 if (deliverable) { recipients.add(ce) }
                 if (!isOwner && !recipients.contains(env.INSTRUCTOR)) { recipients.add(env.INSTRUCTOR) }
