@@ -1,0 +1,9 @@
+.git
+artifacts
+__pycache__
+.pytest_cache
+Jenkinsfile
+README.md
+scripts
+metrics_live.json
+mail_body.txt

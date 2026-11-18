@@ -1,0 +1,7 @@
+artifacts/
+__pycache__/
+.pytest_cache/
+*.pyc
+.venv/
+metrics_live.json
+mail_body.txt
