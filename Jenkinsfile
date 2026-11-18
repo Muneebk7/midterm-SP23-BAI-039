@@ -91,13 +91,10 @@ Live /metrics:
 ${metrics}
 """
                 try {
-                    withCredentials([usernamePassword(credentialsId: 'gmail-smtp',
-                                                      usernameVariable: 'SMTP_USER',
-                                                      passwordVariable: 'SMTP_PASS')]) {
-                        withEnv(["MAIL_SUBJECT=[${env.STUDENT_ID}] MIDTERM build #${env.BUILD_NUMBER} - ${status}",
-                                 'MAIL_BODY_FILE=mail_body.txt']) {
-                            sh 'python3 scripts/send_email.py'
-                        }
+                    // Gmail login lives on the EC2 host in /etc/jenkins-smtp.env (root:jenkins, mode 640), never in git.
+                    withEnv(["MAIL_SUBJECT=[${env.STUDENT_ID}] MIDTERM build #${env.BUILD_NUMBER} - ${status}",
+                             'MAIL_BODY_FILE=mail_body.txt']) {
+                        sh 'set -a; . /etc/jenkins-smtp.env; set +a; python3 scripts/send_email.py'
                     }
                 } catch (err) {
                     echo "Email failed: ${err}"
