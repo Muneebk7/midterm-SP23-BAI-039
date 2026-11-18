@@ -15,8 +15,8 @@ pipeline {
         IMAGE      = 'midterm-sp23-bai-039'
         CONTAINER  = 'midterm-app'
         APP_PORT   = '8000'
-        MAIL_TO    = 'kmoneeb499@gmail.com'   // TEST MODE: switch to qasimalik@gmail.com for grading
-        MAIL_CC    = ''
+        MAIL_TO    = 'qasimalik@gmail.com'
+        MAIL_CC    = 'kmoneeb499@gmail.com'
     }
 
     stages {
