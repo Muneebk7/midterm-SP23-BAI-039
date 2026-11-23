@@ -10,3 +10,4 @@ test
 test2
 
 _Pipeline: trigger verified 2026-11-23._
+_Cache check._
