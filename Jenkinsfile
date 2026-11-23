@@ -170,14 +170,16 @@ pipeline {
         always {
             script {
                 // Recipients:
-                //  * the person who made the commit (if their address is usable)
-                //  * PLUS the instructor whenever the commit is not the owner's (e.g. the autograder),
-                //    or when no usable committer address is available - so the graded mail is never lost.
-                //  * if the owner's own commit has no usable address, fall back to the owner.
+                //  * SUCCESS: only the person who made the commit.
+                //  * Not SUCCESS (failed/unstable): the committer, plus the instructor if the commit is not
+                //    the owner's, so a failed run on someone else's push is never silent.
+                //  * Safety net: if the committer has no usable address (e.g. GitHub noreply), the mail goes to
+                //    the owner so it is never lost. The instructor is never added on SUCCESS.
                 // Literals are used on purpose: this block must work even if the build failed very early.
                 def instructor = 'qasimalik@gmail.com'
                 def owner      = 'kmoneeb499@gmail.com'
 
+                def status = currentBuild.currentResult ?: 'UNKNOWN'
                 def ce = (env.COMMIT_EMAIL ?: '').trim().toLowerCase()
                 def cn = (env.COMMIT_NAME ?: '').trim()
                 def deliverable = ce.contains('@') && !ce.endsWith('noreply.github.com')
@@ -185,11 +187,10 @@ pipeline {
 
                 def recipients = []
                 if (deliverable) { recipients.add(ce) }
-                if (!isOwner && !recipients.contains(instructor)) { recipients.add(instructor) }
+                if (status != 'SUCCESS' && !isOwner && !recipients.contains(instructor)) { recipients.add(instructor) }
                 if (recipients.isEmpty()) { recipients.add(owner) }
                 def mailTo = recipients.join(',')
 
-                def status = currentBuild.currentResult ?: 'UNKNOWN'
                 echo "Committer: ${cn ?: 'unknown'} <${ce ?: 'unknown'}>  -> mailing: ${mailTo}"
 
                 def metrics = fileExists('metrics_live.json') ?
