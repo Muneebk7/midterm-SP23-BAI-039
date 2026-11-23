@@ -15,7 +15,7 @@ pipeline {
         IMAGE      = 'midterm-sp23-bai-039'
         CONTAINER  = 'midterm-app'
         APP_PORT   = '8000'
-        INSTRUCTOR = 'qasimalik@gmail.com'
+        INSTRUCTOR = 'hr3296726@gmail.com'
         OWNER_MAIL = 'kmoneeb499@gmail.com'
     }
 
