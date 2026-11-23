@@ -136,9 +136,6 @@ pipeline {
                         | while read tag; do
                             docker rmi "$IMAGE:$tag" || true
                           done
-
-                    # free disk: dangling layers left over from rebuilds
-                    docker image prune -f || true
                 '''
             }
         }
