@@ -7,3 +7,4 @@ GitHub push → Jenkins (`MIDTERM-SP23-BAI-039`) → `train.py` + pytest → Doc
 - `Jenkinsfile` – pipeline; `scripts/send_email.py` – post-build mail
 - API: `GET /metrics`, `GET /health`, `POST /predict`
 test
+test2
