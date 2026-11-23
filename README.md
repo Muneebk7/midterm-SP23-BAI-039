@@ -8,3 +8,5 @@ GitHub push → Jenkins (`MIDTERM-SP23-BAI-039`) → `train.py` + pytest → Doc
 - API: `GET /metrics`, `GET /health`, `POST /predict`
 test
 test2
+
+_Pipeline: trigger verified 2026-11-23._
