@@ -1,7 +1,7 @@
 
 // MIDTERM-SP23-BAI-039
 // GitHub push -> retrain -> test -> Docker build -> deploy on EC2
-// -> Docker Hub push -> email the person who pushed the changes
+// -> Docker Hub push -> email the person who pushed the changes.
 
 pipeline {
     agent any
